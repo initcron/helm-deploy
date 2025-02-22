@@ -1,0 +1,27 @@
+---
+# templates/applications.yaml
+{{- if .Values.argocd.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ include "vote-app.fullname" . }}
+  namespace: argocd
+spec:
+  project: {{ .Values.argocd.project }}
+  source:
+    repoURL: {{ .Values.argocd.source.repoURL }}
+    targetRevision: {{ .Values.argocd.source.targetRevision }}
+    path: vote-app
+    helm:
+      valueFiles:
+        - values-{{ .Release.Namespace }}.yaml
+  destination:
+    server: {{ .Values.argocd.destination.server }}
+    namespace: {{ .Values.argocd.destination.namespace }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+{{- end }}

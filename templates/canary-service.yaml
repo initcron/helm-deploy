@@ -1,0 +1,16 @@
+---
+# templates/canary-service.yaml
+{{- if eq .Values.deploymentStrategy.type "canary" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "vote-app.fullname" . }}-stable
+  labels:
+    {{- include "vote-app.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.canary.stableService.type }}
+  ports:
+    - port: {{ .Values.canary.stableService.port }}
+      protocol: TCP
+  selector:
+    {{- include "vote-app.selectorLabels" . | nindent 4 }}

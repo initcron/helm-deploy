@@ -1,0 +1,14 @@
+---
+# values-dev.yaml
+replicaCount: 2
+deploymentStrategy:
+  type: blueGreen
+blueGreen:
+  autoPromotionSeconds: 10
+  previewService:
+    type: NodePort
+    nodePort: 30100
+
+argocd:
+  destination:
+    namespace: vote-dev

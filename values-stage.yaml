@@ -1,0 +1,14 @@
+---
+# values-stage.yaml
+replicaCount: 3
+deploymentStrategy:
+  type: blueGreen
+blueGreen:
+  autoPromotionSeconds: 30
+  previewService:
+    type: NodePort
+    nodePort: 30200
+
+argocd:
+  destination:
+    namespace: vote-stage

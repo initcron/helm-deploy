@@ -1,0 +1,20 @@
+---
+# values-prod.yaml
+replicaCount: 4
+deploymentStrategy:
+  type: canary
+canary:
+  steps:
+    - setWeight: 10
+    - pause: {duration: 10m}
+    - setWeight: 30
+    - pause: {duration: 10m}
+    - setWeight: 50
+    - pause: {duration: 10m}
+    - setWeight: 70
+    - pause: {duration: 10m}
+    - setWeight: 100
+
+argocd:
+  destination:
+    namespace: vote-prod
