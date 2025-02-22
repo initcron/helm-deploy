@@ -9,6 +9,12 @@ blueGreen:
     type: NodePort
     nodePort: 30200
 
+ingress:
+  enabled: true
+  pathPrefix: /stage
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+
 argocd:
   destination:
     namespace: vote-stage

@@ -29,3 +29,4 @@ spec:
   selector:
     {{- include "vote-app.selectorLabels" . | nindent 4 }}
 {{- end }}
+

@@ -64,3 +64,21 @@ argocd:
     server: https://kubernetes.default.svc
     namespace: default
 
+# Ingress Configuration
+ingress:
+  enabled: true
+  className: nginx
+  host: vote.example.com
+  annotations:
+    nginx.ingress.kubernetes.io/whitelist-source-range: ""
+  tls:
+    enabled: false
+    secretName: ""
+  # IP ranges for different environments
+  ipRanges:
+    stage:
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+    prod:
+      - 192.168.0.0/16
+
