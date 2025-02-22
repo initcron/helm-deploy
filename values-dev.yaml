@@ -9,6 +9,9 @@ blueGreen:
     type: NodePort
     nodePort: 30100
 
+ingress:
+  enabled: false
+
 argocd:
   destination:
     namespace: vote-dev
